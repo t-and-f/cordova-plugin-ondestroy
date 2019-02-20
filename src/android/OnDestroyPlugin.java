@@ -10,20 +10,20 @@ import org.json.JSONException;
 import android.util.Log;
 
 public class OnDestroyPlugin extends CordovaPlugin {
- 
+
  private CallbackContext onDestroyCallback = null;
  private final String LOG_TAG = "onDestroyPlugin";
- 
+
  public boolean execute (String action, JSONArray inputs, CallbackContext callbackContext) throws JSONException {
   onDestroyCallback = callbackContext;
   return true;
  }
- 
- @Override public void onDestroy () {
+
+ @Override public void onStop () {
   if (onDestroyCallback != null) onDestroyCallback.sendPluginResult (pluginResultKeep());
-  super.onDestroy ();
+  super.onStop ();
  };
- 
+
  private PluginResult pluginResultKeep () {
   PluginResult pluginResult = new PluginResult (PluginResult.Status.OK);
   pluginResult.setKeepCallback (true);
